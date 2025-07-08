@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/08 03:29:29 by moel-hib         ###   ########.fr       */
+/*   Created: 2025/07/08 02:52:28 by moel-hib          #+#    #+#             */
+/*   Updated: 2025/07/08 03:23:20 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+# include "../includes/philo.h"
 
-int main(int ac, char **av)
+void	error(char *message)
 {
-	(void)av;
-	// i fix it later (i just wanna sleep)
-	if (ac <= 2 || ac >= 6)
-	{
-		write(2, IN_ERROR, ft_strlen(IN_ERROR));
-		exit(1);
-	}
-
-	return (0);
+	if (message)
+		perror(message);
+	exit(1);
 }

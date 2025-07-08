@@ -11,6 +11,7 @@ OBJ = $(SRC:.c=.o)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
+	@echo "\e[1;31mbefore You push fix the wildcard!\e[0m"
 
 all: $(NAME)
 
