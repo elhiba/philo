@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/10 04:05:39 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/13 02:11:51 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	fork_lock(t_data *data, t_philo *philo)
 
 	i = 0;
 	tmp = philo;
+	pen = NULL;
 	pthread_mutex_init(pen, NULL);
 	while (i < data->number_of_philo)
 	{
