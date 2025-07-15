@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:28:50 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/13 23:32:46 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:08:10 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,16 @@ struct s_philo_data
 {
 	int				philo_id; // Number of phiolosopher
 
-	long long		timestamp; // timestamp in ms
+	long long		philo_start; // When phiolosopher started
+	int				meal_counter; // How many time this philo eats!
+	int				last_meal; // last time eated
 
-	pthread_mutex_t	*left_fork; // The philo fork
-	pthread_mutex_t	*right_fork; // The next philo fork
+	pthread_mutex_t	left_fork; // The philo fork
+	pthread_mutex_t	right_fork; // The next philo fork
 
 	pthread_mutex_t	*pen; // This will control the pen! to write { timestamp_in_ms X has taken a fork\n ...}
 
-	t_philo_info	*next;
+	t_philo_data	*next;
 };
 
 /* Functions */
@@ -81,9 +83,13 @@ struct s_philo_data
 */
 
 /* Convert ascii to integer */
-int	ft_atoi(char *number);
+long long			ft_atoi(char *number);
 
 /* parse inputes to the structure */
-void	philo_parser(t_philo_info *philo_info, char **args);
+void		philo_parser(t_philo_info *philo_info, char **args);
+void		philo_linker(t_philo_data *philo_data, t_philo_info *philo_info);
+
+/* real time */
+long long	current_time();
 
 #endif
