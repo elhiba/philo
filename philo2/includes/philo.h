@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:28:50 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/15 05:25:06 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/24 15:01:55 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <pthread.h>
+# include <stdbool.h>
 # include <sys/time.h>
 
 /*
@@ -56,6 +57,12 @@ struct s_philo_info
 	int				tm_to_sleep;
 	int				nb_tm_to_eat;
 
+	bool			someone_die;
+	pthread_mutex_t	stop_mutex;
+
+	pthread_mutex_t	pen; // This will control the pen! to write { timestamp_in_ms X has taken a fork\n ...}
+
+	t_philo_data	**philos;
 	t_philo_data	*philo_data;
 };
 
@@ -70,9 +77,9 @@ struct s_philo_data
 	pthread_mutex_t	left_fork; // The philo fork
 	pthread_mutex_t	right_fork; // The next philo fork
 
-	pthread_mutex_t	pen; // This will control the pen! to write { timestamp_in_ms X has taken a fork\n ...}
-
 	t_philo_data	*next;
+
+	t_philo_info	*info;
 };
 
 /* Functions */

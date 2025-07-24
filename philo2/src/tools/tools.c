@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 21:04:55 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/15 05:26:10 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/24 14:28:42 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_philo_data	*philo_zone()
 	return (philo_tracker);
 }
 
-void	philo_creator(t_philo_data *philo_data, t_philo_info *philo_info)
+void	philo_create(t_philo_data *philo_data, t_philo_info *philo_info)
 {
 	t_philo_data	*philo_tracker;
 	int				i;

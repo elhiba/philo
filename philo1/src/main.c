@@ -6,16 +6,15 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/13 02:11:51 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/24 18:55:46 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
 void	init_data(t_data *data, char **av)
 {
 	memset(data, 0, sizeof(t_data));
-	data->number_of_philo = ft_atoi(av[0]);
+	data->nm_philo = ft_atoi(av[0]);
 	data->tm_die = ft_atoi(av[1]);
 	data->tm_eat = ft_atoi(av[2]);
 	data->tm_sleep = ft_atoi(av[3]);
@@ -36,10 +35,10 @@ t_philo	*init_philo(t_data *data)
 	if (!ptr)
 		return (NULL);
 	philo = ptr;
-	while (i < data->number_of_philo)
+	while (i < data->nm_philo)
 	{
 		tmp = malloc(sizeof(t_data));
-		if (tmp)
+		if (!tmp)
 			return (NULL);
 		ptr = ptr->next;
 		ptr = tmp;
@@ -50,25 +49,24 @@ t_philo	*init_philo(t_data *data)
 
 void	fork_lock(t_data *data, t_philo *philo)
 {
-	int		i;
-	t_philo	*tmp;
+	int				i;
+	t_philo			*tmp;
 	pthread_mutex_t	*pen;
 
 	i = 0;
 	tmp = philo;
 	pen = NULL;
 	pthread_mutex_init(pen, NULL);
-	while (i < data->number_of_philo)
+	while (i < data->nm_philo)
 	{
-		tmp->last_meal = 0;
-		tmp->many_eat = 0;
+		memset(tmp, 0, sizeof(t_philo));
 		tmp->time_to_eat = data->tm_eat;
 		tmp->time_to_sleep = data->tm_sleep;
 		pthread_mutex_init(tmp->time_to_die, NULL);
 		pthread_mutex_init(tmp->tm_eat, NULL);
 		pthread_mutex_init(tmp->fork, NULL);
 		tmp->pen = pen;
-		if (i != (data->number_of_philo - 1))
+		if (i != (data->nm_philo - 1))
 		{
 			pthread_mutex_init(tmp->next->fork, NULL);
 			tmp->fork_right = tmp->next->fork;
@@ -91,12 +89,12 @@ void	*routini(void *tmp)
 	return (NULL);
 }
 
-void	*olderbrother(void *sus)
+void	*monitor(void *sus)
 {
 	t_data	*amongus = (t_data *)sus;
 	t_philo *tmp = amongus->philo;
 
-	while (tmp->next)
+	while (tmp)
 	{
 		pthread_create(&tmp->philo, NULL, routini, (void *)tmp);
 		tmp = tmp->next;
@@ -124,7 +122,7 @@ int main(int ac, char **av)
 
 	pthread_t	t1;
 
-	pthread_create(&t1, NULL, olderbrother, (void *)&data);
+	pthread_create(&t1, NULL, monitor, (void *)&data);
 
 	pthread_join(t1, NULL);
 

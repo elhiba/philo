@@ -1,0 +1,50 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-o",
+      "src/error.o",
+      "src/error.c"
+    ],
+    "directory": "/home/elhiba/Documents/code/philo/philo1",
+    "file": "/home/elhiba/Documents/code/philo/philo1/src/error.c",
+    "output": "/home/elhiba/Documents/code/philo/philo1/src/error.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-o",
+      "src/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/elhiba/Documents/code/philo/philo1",
+    "file": "/home/elhiba/Documents/code/philo/philo1/src/main.c",
+    "output": "/home/elhiba/Documents/code/philo/philo1/src/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-o",
+      "src/tasks.o",
+      "src/tasks.c"
+    ],
+    "directory": "/home/elhiba/Documents/code/philo/philo1",
+    "file": "/home/elhiba/Documents/code/philo/philo1/src/tasks.c",
+    "output": "/home/elhiba/Documents/code/philo/philo1/src/tasks.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-c",
+      "-o",
+      "src/tools.o",
+      "src/tools.c"
+    ],
+    "directory": "/home/elhiba/Documents/code/philo/philo1",
+    "file": "/home/elhiba/Documents/code/philo/philo1/src/tools.c",
+    "output": "/home/elhiba/Documents/code/philo/philo1/src/tools.o"
+  }
+]

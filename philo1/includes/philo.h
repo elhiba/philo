@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/13 02:01:35 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/24 18:44:03 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -44,7 +44,6 @@ typedef struct	s_philo
 	long long				time_to_sleep;
 	long long				last_meal;
 
-
 	pthread_mutex_t	*pen;
 
 	struct s_philo	*next;
@@ -52,7 +51,7 @@ typedef struct	s_philo
 
 typedef struct	s_data
 {
-	int		number_of_philo;
+	int		nm_philo;
 	int		tm_die;
 	int		tm_eat;
 	int		tm_sleep;

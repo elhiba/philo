@@ -1,0 +1,50 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/elhiba/Documents/code/philo/philo2",
+    "file": "/home/elhiba/Documents/code/philo/philo2/src/main.c",
+    "output": "/home/elhiba/Documents/code/philo/philo2/src/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/tools/someft.o",
+      "src/tools/someft.c"
+    ],
+    "directory": "/home/elhiba/Documents/code/philo/philo2",
+    "file": "/home/elhiba/Documents/code/philo/philo2/src/tools/someft.c",
+    "output": "/home/elhiba/Documents/code/philo/philo2/src/tools/someft.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/tools/tools.o",
+      "src/tools/tools.c"
+    ],
+    "directory": "/home/elhiba/Documents/code/philo/philo2",
+    "file": "/home/elhiba/Documents/code/philo/philo2/src/tools/tools.c",
+    "output": "/home/elhiba/Documents/code/philo/philo2/src/tools/tools.o"
+  }
+]
