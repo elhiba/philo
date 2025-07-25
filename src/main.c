@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moel-hib <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/25 18:25:18 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:18:21 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	*routini(void *tmp)
 	writer(le_philo, "is eating");
 
 	usleep(le_philo->data->tm_sleep * 1000ll);
+	writer(le_philo, "is sleeping");
 
 	pthread_mutex_unlock(le_philo->fork);
 	pthread_mutex_unlock(le_philo->fork_right);

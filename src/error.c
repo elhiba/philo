@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 02:52:28 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/08 03:23:20 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:18:36 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ void	error(char *message)
 {
 	if (message)
 		perror(message);
-	exit(1);
+	return ;
 }
