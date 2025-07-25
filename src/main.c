@@ -6,7 +6,7 @@
 /*   By: moel-hib <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/25 17:59:00 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:25:18 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	*monitor(void *sus)
 	i = 0;
 	amongus = (t_data *)sus;
 	le_philo = amongus->philo;
-	while (i < le_philo->data->nm_philo)
+	while (le_philo->data && i < le_philo->data->nm_philo)
 	{
 		pthread_create(&le_philo->philo, NULL, routini, (void *)le_philo);
 		le_philo = le_philo->next;
@@ -150,7 +150,7 @@ void	*monitor(void *sus)
 int main(int ac, char **av)
 {
 	pthread_t	t1;
-	t_data	data;
+	t_data		data;
 
 	if (!(ac == 5 || ac == 6))
 	{
