@@ -1,9 +1,9 @@
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -g3 #-Wall -Wextra -Werror 
 
-SRC = $(wildcard src/*.c)
+SRC = $(wildcard src/*.c tools/*.c)
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c
@@ -12,6 +12,7 @@ OBJ = $(SRC:.c=.o)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 	@echo "\e[1;31mbefore You push fix the wildcard!\e[0m"
+	@echo "\e[1;31mNO_FLAGS!\e[0m"
 
 all: $(NAME)
 

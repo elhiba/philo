@@ -6,35 +6,27 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 03:24:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/10 04:00:24 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/25 01:32:40 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	ft_strlen(char *str)
+void	mine_sleep(t_philo *le_philo)
 {
-	int	i;
-	
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	while (1)
+	{
+		if (le_philo->data->tm_sleep <= (get_time() - le_philo->time_to_sleep))
+			break ;
+		usleep(50);
+	}
 }
 
-int	ft_atoi(char *num)
+void	writer(t_philo *data, char *message)
 {
-	int	i;
-	int	result;
-
-	i = 0;
-	result = 0;
-	while (num[i] >= '0' && num[i] <= '9')
-	{
-		result = result * 10 + num[i] - 48;
-		i++;
-	}
-	return (result);
+	pthread_mutex_lock(data->pen);
+	printf("%lld %i %s\n", get_time() - data->start_routine, data->philo_id, message);
+	pthread_mutex_unlock(data->pen);
 }
 
 long long	get_time()

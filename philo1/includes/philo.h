@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/13 02:01:35 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/25 01:00:14 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -21,52 +21,79 @@
 # include <string.h>
 # include <errno.h>
 
-#define IN_ERROR "You must enter the following arguments:\n\t\
+# define IN_ERROR "You must enter the following arguments:\n\t\
 	number_of_philosophers time_to_die time_to_eat time_to_sleep\
 	[number_of_times_each_philosopher_must_eat]\n"
 
-typedef struct	s_philo
+typedef struct s_philo	t_philo;
+typedef struct s_data	t_data;
+
+/*
+		1 - philo_id
+		2 - philo;        
+		              
+		*fork;        
+		*fork_right;  
+		              
+		*tm_eat;      
+		*time_to_die; 
+		              
+		start_routine;
+		              
+		many_eat;     
+		time_to_eat;  
+		time_to_sleep;
+		last_meal;    
+		              
+		*pen;         
+		              
+		*next;        
+
+ */
+struct s_philo
 {
-	int				philo_id;
+	int						philo_id;
 
-	pthread_t		philo;
+	pthread_t				philo;
 
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	*fork_right;
+	pthread_mutex_t			*fork;
+	pthread_mutex_t			*fork_right;
 
-	pthread_mutex_t	*tm_eat;
-	pthread_mutex_t	*time_to_die;
+	pthread_mutex_t			*tm_eat;
+	pthread_mutex_t			*time_to_die;
 
-	long long	start_routine;
+	long long				start_routine;
 
 	int						many_eat;
 	long long				time_to_eat;
 	long long				time_to_sleep;
 	long long				last_meal;
 
+	pthread_mutex_t			*pen;
 
-	pthread_mutex_t	*pen;
+	t_data					*data;
 
-	struct s_philo	*next;
-}	t_philo;
+	struct s_philo			*next;
+};
 
-typedef struct	s_data
+struct s_data
 {
-	int		number_of_philo;
-	int		tm_die;
-	int		tm_eat;
-	int		tm_sleep;
-	int		tm_each_philo_meat;
+	int						nm_philo;
+	int						tm_die;
+	int						tm_eat;
+	int						tm_sleep;
+	int						tm_each_philo_meat;
 
-
-	t_philo		*philo;
-} t_data;
+	t_philo					*philo;
+};
 
 /* Tools functions */
+void	writer(t_philo *data, char *message);
 
-int	ft_strlen(char *str);
-int	ft_atoi(char *num);
+/* Related with LIBFT */
+int			ft_strlen(char *str);
+int			ft_atoi(char *num);
 
 /* Function of time */
-long long	get_time();
+long long	get_time(void);
 #endif

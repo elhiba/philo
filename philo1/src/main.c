@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/13 02:11:51 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/25 06:46:43 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_data(t_data *data, char **av)
 {
 	memset(data, 0, sizeof(t_data));
-	data->number_of_philo = ft_atoi(av[0]);
+	data->nm_philo = ft_atoi(av[0]);
 	data->tm_die = ft_atoi(av[1]);
 	data->tm_eat = ft_atoi(av[2]);
 	data->tm_sleep = ft_atoi(av[3]);
@@ -24,6 +24,7 @@ void	init_data(t_data *data, char **av)
 	else
 		data->tm_each_philo_meat = -1;
 }
+
 t_philo	*init_philo(t_data *data)
 {
 	int		i;
@@ -32,16 +33,17 @@ t_philo	*init_philo(t_data *data)
 	t_philo	*philo;
 
 	i = 0;
-	ptr = malloc(sizeof(t_data));
+	ptr = malloc(sizeof(t_philo));
 	if (!ptr)
 		return (NULL);
 	philo = ptr;
-	while (i < data->number_of_philo)
+	while (i < data->nm_philo)
 	{
-		tmp = malloc(sizeof(t_data));
-		if (tmp)
+		tmp = malloc(sizeof(t_philo));
+		if (!tmp)
 			return (NULL);
-		ptr = ptr->next;
+		memset(ptr, 0, sizeof(t_philo));
+		ptr->next = tmp;
 		ptr = tmp;
 		i++;
 	}
@@ -50,33 +52,49 @@ t_philo	*init_philo(t_data *data)
 
 void	fork_lock(t_data *data, t_philo *philo)
 {
-	int		i;
-	t_philo	*tmp;
-	pthread_mutex_t	*pen;
+	int				i;
+	t_philo			*ptr;
+	pthread_mutex_t	pen;
 
 	i = 0;
-	tmp = philo;
-	pen = NULL;
-	pthread_mutex_init(pen, NULL);
-	while (i < data->number_of_philo)
+	ptr = philo;
+	//pen = NULL;
+	pthread_mutex_init(&pen, NULL);
+	while (i < data->nm_philo)
 	{
-		tmp->last_meal = 0;
-		tmp->many_eat = 0;
-		tmp->time_to_eat = data->tm_eat;
-		tmp->time_to_sleep = data->tm_sleep;
-		pthread_mutex_init(tmp->time_to_die, NULL);
-		pthread_mutex_init(tmp->tm_eat, NULL);
-		pthread_mutex_init(tmp->fork, NULL);
-		tmp->pen = pen;
-		if (i != (data->number_of_philo - 1))
+		ptr->philo_id = i + 1;
+		ptr->time_to_eat = data->tm_eat;
+		ptr->time_to_sleep = data->tm_sleep;
+
+		ptr->pen = &pen;
+		ptr->data = data;
+
+		ptr->time_to_die = malloc(sizeof(pthread_mutex_t));
+		ptr->tm_eat = malloc(sizeof(pthread_mutex_t));
+		ptr->fork = malloc(sizeof(pthread_mutex_t));
+
+		if (!ptr->time_to_die || !ptr->tm_eat || !ptr->fork)
+			return ;
+
+		pthread_mutex_init(ptr->time_to_die, NULL);
+		pthread_mutex_init(ptr->tm_eat, NULL);
+		pthread_mutex_init(ptr->fork, NULL);
+
+		ptr = ptr->next;
+		i++;
+	}
+
+	i = 0;
+	ptr = philo;
+	while (i < data->nm_philo)
+	{
+		if (i != (data->nm_philo - 1))
 		{
-			pthread_mutex_init(tmp->next->fork, NULL);
-			tmp->fork_right = tmp->next->fork;
-			tmp = tmp->next;
+			ptr->fork_right = ptr->next->fork;
+			ptr = ptr->next;
 		}
 		else
-			tmp->fork_right = philo->fork;
-
+			ptr->fork_right = philo->fork;
 		i++;
 	}
 }
@@ -88,28 +106,50 @@ void	*routini(void *tmp)
 	le_philo = (t_philo *)tmp;
 	le_philo->start_routine = get_time();
 
+	pthread_mutex_lock(le_philo->fork);
+	writer(le_philo, "has taken a fork");
+	pthread_mutex_lock(le_philo->fork_right);
+	writer(le_philo, "has taken a fork");
+
+	pthread_mutex_lock(le_philo->time_to_die);
+	le_philo->last_meal = get_time();
+	pthread_mutex_unlock(le_philo->time_to_die);
+
+	writer(le_philo, "is eating");
+
+	usleep(le_philo->data->tm_sleep * 1000ll);
+
+	pthread_mutex_unlock(le_philo->fork);
+	pthread_mutex_unlock(le_philo->fork_right);
+
+	writer(le_philo, "is thinking");
+
 	return (NULL);
 }
 
-void	*olderbrother(void *sus)
+void	*monitor(void *sus)
 {
-	t_data	*amongus = (t_data *)sus;
-	t_philo *tmp = amongus->philo;
+	t_data	*amongus;
+	t_philo	*le_philo;
 
-	while (tmp->next)
+	amongus = (t_data *)sus;
+	le_philo = (*amongus).philo;
+	while (le_philo)
 	{
-		pthread_create(&tmp->philo, NULL, routini, (void *)tmp);
-		tmp = tmp->next;
+		pthread_create(&le_philo->philo, NULL, routini, (void *)le_philo);
+		le_philo = le_philo->next;
 	}
 	while(1)
-		;
+	{
+
+	}
 	return NULL;
 }
 
 int main(int ac, char **av)
 {
+	pthread_t	t1;
 	t_data	data;
-	t_philo	*head;
 
 	if (!(ac == 5 || ac == 6))
 	{
@@ -118,13 +158,10 @@ int main(int ac, char **av)
 	}
 
 	init_data(&data, ++av);
-	head = init_philo(&data);
+	data.philo = init_philo(&data);
+	fork_lock(&data, (&data)->philo);
 
-	data.philo = head;
-
-	pthread_t	t1;
-
-	pthread_create(&t1, NULL, olderbrother, (void *)&data);
+	pthread_create(&t1, NULL, monitor, (void *)&data);
 
 	pthread_join(t1, NULL);
 
