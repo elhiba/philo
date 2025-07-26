@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/25 01:00:14 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/26 10:14:58 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -62,7 +62,6 @@ struct s_philo
 	pthread_mutex_t			*tm_eat;
 	pthread_mutex_t			*time_to_die;
 
-	long long				start_routine;
 
 	int						many_eat;
 	long long				time_to_eat;
@@ -83,6 +82,8 @@ struct s_data
 	int						tm_eat;
 	int						tm_sleep;
 	int						tm_each_philo_meat;
+
+	long long				start_routine;
 
 	t_philo					*philo;
 };
