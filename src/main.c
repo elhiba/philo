@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/25 19:18:21 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/26 09:54:56 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	*routini(void *tmp)
 	t_philo	*le_philo;
 
 	le_philo = (t_philo *)tmp;
-	le_philo->start_routine = get_time();
 
 	pthread_mutex_lock(le_philo->fork);
 	writer(le_philo, "has taken a fork");
@@ -137,9 +136,11 @@ void	*monitor(void *sus)
 	i = 0;
 	amongus = (t_data *)sus;
 	le_philo = amongus->philo;
+	amongus->start_routine = get_time();
 	while (le_philo->data && i < le_philo->data->nm_philo)
 	{
 		pthread_create(&le_philo->philo, NULL, routini, (void *)le_philo);
+		pthread_join(le_philo->philo, NULL);
 		le_philo = le_philo->next;
 		i++;
 	}
