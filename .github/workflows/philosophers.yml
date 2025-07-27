@@ -1,0 +1,27 @@
+name: philos
+
+on:
+  push:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile
+      - run: make
+
+      - name: Run 2 philos eat 4 times
+      - name: ./philo 2 410 200 200 4
+
+      - name: Run 200 philos eat 4 times
+      - name: ./philo 200 410 200 200 4
+
+      - name: Valgrind (testing Allocation with Race Data)
+      - name: valgrind --tool=helgrind ./philo 2 410 200 200 4
+
+      - name: Valgrind (testing Allocation with Race Data)
+      - name: valgrind --tool=helgrind ./philo 200 410 200 200 4
