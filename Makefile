@@ -12,7 +12,8 @@ OBJ = $(SRC:.c=.o)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 	@echo "\e[1;31mbefore You push fix the wildcard!\e[0m"
-	@echo "\e[1;31mNO_FLAGS!\e[0m"
+
+#@echo "\e[1;31mNO_FLAGS!\e[0m"
 
 all: $(NAME)
 

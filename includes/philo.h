@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/27 01:45:08 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/27 15:51:36 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -99,6 +99,7 @@ void	cleaner(t_data *data);
 /* Related with LIBFT */
 int			ft_strlen(char *str);
 int			ft_atoi(char *num);
+void		*ft_calloc(size_t nmemb, size_t size);
 
 /* Function of time */
 long long	get_time(void);

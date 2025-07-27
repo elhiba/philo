@@ -6,15 +6,12 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/27 02:49:13 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/27 15:55:01 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-/*
-! important
-*/
 void	init_data(t_data *data, char **av)
 {
 	memset(data, 0, sizeof(t_data));
@@ -55,46 +52,16 @@ t_philo	*init_philo(t_data *data)
 	return (philo);
 }
 
-void	fork_lock(t_data *data, t_philo *philo)
+void	philo_linker(t_philo *philo)
 {
-	int				i;
-	t_philo			*ptr;
-	pthread_mutex_t	*pen;
+	t_philo	*ptr;
+	int		i;
 
 	i = 0;
 	ptr = philo;
-	//pen = NULL;
-	pen = malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(pen, NULL);
-	while (i < data->nm_philo)
+	while (i < ptr->data->nm_philo)
 	{
-		ptr->philo_id = i + 1;
-		ptr->time_to_eat = data->tm_eat;
-		ptr->time_to_sleep = data->tm_sleep;
-
-		ptr->pen = pen;
-		ptr->data = data;
-
-		ptr->time_to_die = malloc(sizeof(pthread_mutex_t));
-		ptr->tm_eat = malloc(sizeof(pthread_mutex_t));
-		ptr->fork = malloc(sizeof(pthread_mutex_t));
-
-		if (!ptr->time_to_die || !ptr->tm_eat || !ptr->fork)
-			return ;
-
-		pthread_mutex_init(ptr->time_to_die, NULL);
-		pthread_mutex_init(ptr->tm_eat, NULL);
-		pthread_mutex_init(ptr->fork, NULL);
-
-		ptr = ptr->next;
-		i++;
-	}
-
-	i = 0;
-	ptr = philo;
-	while (i < data->nm_philo)
-	{
-		if (i != (data->nm_philo - 1))
+		if (i != (ptr->data->nm_philo - 1))
 		{
 			ptr->fork_right = ptr->next->fork;
 			ptr = ptr->next;
@@ -103,6 +70,35 @@ void	fork_lock(t_data *data, t_philo *philo)
 			ptr->fork_right = philo->fork;
 		i++;
 	}
+}
+
+void	fork_lock(t_data *data, t_philo *philo)
+{
+	int				i;
+	t_philo			*ptr;
+	pthread_mutex_t	*pen;
+
+	i = 0;
+	ptr = philo;
+	pen = ft_calloc(1, sizeof(pthread_mutex_t));
+	pthread_mutex_init(pen, NULL);
+	while (i < data->nm_philo)
+	{
+		ptr->philo_id = i + 1;
+		ptr->time_to_eat = data->tm_eat;
+		ptr->time_to_sleep = data->tm_sleep;
+		ptr->pen = pen;
+		ptr->data = data;
+		ptr->time_to_die = ft_calloc(1, sizeof(pthread_mutex_t));
+		ptr->tm_eat = ft_calloc(1, sizeof(pthread_mutex_t));
+		ptr->fork = ft_calloc(1, sizeof(pthread_mutex_t));
+		pthread_mutex_init(ptr->time_to_die, NULL);
+		pthread_mutex_init(ptr->tm_eat, NULL);
+		pthread_mutex_init(ptr->fork, NULL);
+		ptr = ptr->next;
+		i++;
+	}
+	philo_linker(philo);
 }
 
 void	*routini(void *tmp)
@@ -183,9 +179,6 @@ void	*monitor(void *sus)
 		i++;
 	}
 
-	/*
-	 * while (le)*/
-	/* iterate through the linked list and pthread_join all the philos*/
 	i = 0;
 	while(1)
 	{
