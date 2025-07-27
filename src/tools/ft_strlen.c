@@ -6,11 +6,11 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 23:24:07 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/24 23:24:24 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/26 17:25:15 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../../includes/philo.h"
 
 int	ft_strlen(char *str)
 {

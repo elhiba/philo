@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/26 10:14:58 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/27 01:45:08 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -15,7 +15,9 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <pthread.h>
+# include <stdatomic.h>
 # include <sys/time.h>
 
 # include <string.h>
@@ -72,7 +74,7 @@ struct s_philo
 
 	t_data					*data;
 
-	struct s_philo			*next;
+	t_philo					*next;
 };
 
 struct s_data
@@ -81,15 +83,18 @@ struct s_data
 	int						tm_die;
 	int						tm_eat;
 	int						tm_sleep;
-	int						tm_each_philo_meat;
+	_Atomic int				tm_each_philo_meat;
 
 	long long				start_routine;
+
+	_Atomic bool			dead_flag;
 
 	t_philo					*philo;
 };
 
 /* Tools functions */
 void	writer(t_philo *data, char *message);
+void	cleaner(t_data *data);
 
 /* Related with LIBFT */
 int			ft_strlen(char *str);
