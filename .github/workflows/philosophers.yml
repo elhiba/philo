@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Update & upgrade + Installing valgrind
+        run: apt update; apt upgrade -y; apt install valgrind
+
       - name: Compile
         run: make
 
