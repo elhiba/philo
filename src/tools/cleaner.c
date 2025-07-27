@@ -6,17 +6,21 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:03:36 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/26 18:17:08 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/28 00:21:49 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/philo.h"
 
+void	philo_job()
+{
+
+}
+
 void	cleaner(t_data *data)
 {
 	t_philo	*ptr;
 	int		i;
-
 	
 	i = 0;
 	ptr = data->philo;

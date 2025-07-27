@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/27 15:51:36 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/28 00:24:04 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -19,9 +19,7 @@
 # include <pthread.h>
 # include <stdatomic.h>
 # include <sys/time.h>
-
 # include <string.h>
-# include <errno.h>
 
 # define IN_ERROR "You must enter the following arguments:\n\t\
 	number_of_philosophers time_to_die time_to_eat time_to_sleep\
@@ -64,11 +62,10 @@ struct s_philo
 	pthread_mutex_t			*tm_eat;
 	pthread_mutex_t			*time_to_die;
 
-
 	int						many_eat;
 	long long				time_to_eat;
 	long long				time_to_sleep;
-	long long				last_meal;
+	_Atomic long long				last_meal;
 
 	pthread_mutex_t			*pen;
 
@@ -92,9 +89,14 @@ struct s_data
 	t_philo					*philo;
 };
 
-/* Tools functions */
-void	writer(t_philo *data, char *message);
-void	cleaner(t_data *data);
+/* Philos functions */
+void		init_data(t_data *data, char **av);
+t_philo		*init_philo(t_data *data);
+void		fork_lock(t_data *data, t_philo *philo);
+
+/* Tools	 functions */
+void		writer(t_philo *data, char *message);
+void		cleaner(t_data *data);
 
 /* Related with LIBFT */
 int			ft_strlen(char *str);
