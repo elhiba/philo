@@ -12,7 +12,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Update & upgrade + Installing valgrind
-        run: apt update; apt upgrade -y; apt install valgrind
+        run: |
+          sudo apt update 
+          sudo apt upgrade -y
+          sudo apt install -y valgrind
 
       - name: Compile
         run: make
