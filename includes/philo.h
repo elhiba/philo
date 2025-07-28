@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/28 00:24:04 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/28 06:31:55 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -59,13 +59,10 @@ struct s_philo
 	pthread_mutex_t			*fork;
 	pthread_mutex_t			*fork_right;
 
-	pthread_mutex_t			*tm_eat;
-	pthread_mutex_t			*time_to_die;
-
-	int						many_eat;
-	long long				time_to_eat;
-	long long				time_to_sleep;
-	_Atomic long long				last_meal;
+	_Atomic int				many_eat;
+	_Atomic long			time_to_eat;
+	_Atomic long			time_to_sleep;
+	_Atomic long			last_meal;
 
 	pthread_mutex_t			*pen;
 
@@ -77,12 +74,14 @@ struct s_philo
 struct s_data
 {
 	int						nm_philo;
-	int						tm_die;
-	int						tm_eat;
-	int						tm_sleep;
-	_Atomic int				tm_each_philo_meat;
+	long					tm_die;
+	long					tm_eat;
+	long					tm_sleep;
+	_Atomic long				tm_each_philo_meat;
 
-	long long				start_routine;
+	long				start_routine;
+
+	_Atomic bool			start;
 
 	_Atomic bool			dead_flag;
 
@@ -95,7 +94,7 @@ t_philo		*init_philo(t_data *data);
 void		fork_lock(t_data *data, t_philo *philo);
 
 /* Tools	 functions */
-void		writer(t_philo *data, char *message);
+int			writer(t_philo *data, char *message);
 void		cleaner(t_data *data);
 
 /* Related with LIBFT */
@@ -104,5 +103,6 @@ int			ft_atoi(char *num);
 void		*ft_calloc(size_t nmemb, size_t size);
 
 /* Function of time */
-long long	get_time(void);
+long	get_time(void);
+void	mine_sleep(long tm_sleep);
 #endif

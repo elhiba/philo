@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:31:32 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/28 00:20:43 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/07/28 02:54:00 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	fork_lock(t_data *data, t_philo *philo)
 	ptr = philo;
 	pen = ft_calloc(1, sizeof(pthread_mutex_t));
 	pthread_mutex_init(pen, NULL);
+	data->start = false;
 	while (i < data->nm_philo)
 	{
 		ptr->philo_id = i + 1;
@@ -83,11 +84,7 @@ void	fork_lock(t_data *data, t_philo *philo)
 		ptr->time_to_sleep = data->tm_sleep;
 		ptr->pen = pen;
 		ptr->data = data;
-		ptr->time_to_die = ft_calloc(1, sizeof(pthread_mutex_t));
-		ptr->tm_eat = ft_calloc(1, sizeof(pthread_mutex_t));
 		ptr->fork = ft_calloc(1, sizeof(pthread_mutex_t));
-		pthread_mutex_init(ptr->time_to_die, NULL);
-		pthread_mutex_init(ptr->tm_eat, NULL);
 		pthread_mutex_init(ptr->fork, NULL);
 		ptr = ptr->next;
 		i++;
