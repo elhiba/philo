@@ -6,20 +6,20 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 03:24:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/28 06:33:20 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/01 14:01:33 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-void	mine_sleep(long tm_sleep)
-{
-	long	start_time;
-
-	start_time = get_time();
-	while (tm_sleep <= (get_time() - start_time))
-		usleep(50);
-}
+//void	mine_sleep(long tm_sleep)
+//{
+//	long	start_time;
+//
+//	start_time = get_time();
+//	while (tm_sleep <= (get_time() - start_time))
+//		usleep(50);
+//}
 
 int	writer(t_philo *data, char *message)
 {

@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/28 06:31:55 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/01 14:01:54 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -104,5 +104,5 @@ void		*ft_calloc(size_t nmemb, size_t size);
 
 /* Function of time */
 long	get_time(void);
-void	mine_sleep(long tm_sleep);
+//void	mine_sleep(long tm_sleep);
 #endif
