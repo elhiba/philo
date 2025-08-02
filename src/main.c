@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/01 14:26:02 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/02 21:32:13 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	*routini(void *tmp)
 		usleep(le_philo->data->tm_sleep * 1000l);
 
 		writer(le_philo, "is thinking");
+		usleep(1000);
 
 		i++;
 	}
