@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/01 14:01:54 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/03 22:41:04 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -24,6 +24,12 @@
 # define IN_ERROR "You must enter the following arguments:\n\t\
 	number_of_philosophers time_to_die time_to_eat time_to_sleep\
 	[number_of_times_each_philosopher_must_eat]\n"
+
+# define DIE "die"
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
 
 typedef struct s_philo	t_philo;
 typedef struct s_data	t_data;
