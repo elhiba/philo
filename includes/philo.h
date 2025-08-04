@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/03 22:41:04 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:04:52 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -90,6 +90,7 @@ struct s_data
 	_Atomic bool			start;
 
 	_Atomic bool			dead_flag;
+	_Atomic bool			emergency_stop;
 
 	t_philo					*philo;
 };

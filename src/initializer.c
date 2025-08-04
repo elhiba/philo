@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:31:32 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/28 02:54:00 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:03:40 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	fork_lock(t_data *data, t_philo *philo)
 		ptr->philo_id = i + 1;
 		ptr->time_to_eat = data->tm_eat;
 		ptr->time_to_sleep = data->tm_sleep;
+		ptr->many_eat = data->tm_each_philo_meat;
 		ptr->pen = pen;
 		ptr->data = data;
 		ptr->fork = ft_calloc(1, sizeof(pthread_mutex_t));

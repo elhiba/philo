@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/03 20:43:29 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/04 17:03:37 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,36 @@ void	*routini(void *tmp)
 
 	i = 0;
 	le_philo = (t_philo *)tmp;
-	if (le_philo->philo_id == le_philo->data->nm_philo)
-		le_philo->data->start = true;
+	if (le_philo->philo_id == le_philo->data->nm_philo) le_philo->data->start = true;
 	if ((le_philo->philo_id % 2) == 0)
 		usleep(150);
 	le_philo->last_meal = get_time();
 	while (!le_philo->data->dead_flag)
 	{
-		//if (le_philo->data->tm_each_philo_meat != -1)
-		//{
-		//	if (le_philo->data->tm_each_philo_meat == i)
-		//		//--le_philo->data->tm_each_philo_meat;
-		//}
+		if (le_philo->many_eat == i)
+		{
+			le_philo->data->emergency_stop = 1;
+			break ;
+		}
 
 		if (le_philo->philo_id == le_philo->data->nm_philo)
 		{
 			pthread_mutex_lock(le_philo->fork_right);
-			writer(le_philo, "has taken a fork");
+			writer(le_philo, FORK);
 			pthread_mutex_lock(le_philo->fork);
-			writer(le_philo, "has taken a fork");
+			writer(le_philo, FORK);
 		}
 		else
 		{
 			pthread_mutex_lock(le_philo->fork);
-			writer(le_philo, "has taken a fork");
+			writer(le_philo, FORK);
 			pthread_mutex_lock(le_philo->fork_right);
-			writer(le_philo, "has taken a fork");
+			writer(le_philo, FORK);
 		}
 
 		le_philo->last_meal = get_time();
 
-		writer(le_philo, "is eating");
+		writer(le_philo, EAT);
 		usleep(le_philo->data->tm_eat * 1000l);
 
 		if (le_philo->philo_id == le_philo->data->nm_philo)
@@ -63,15 +62,11 @@ void	*routini(void *tmp)
 			pthread_mutex_unlock(le_philo->fork);
 		}
 
-		writer(le_philo, "is sleeping");
+		writer(le_philo, SLEEP);
 		usleep(le_philo->data->tm_sleep * 1000l);
 
-		writer(le_philo, "is thinking");
-		//usleep(1000);
-		//if (le_philo->philo_id	% 2 == 0)
-			usleep(1000);
-	//	if ((le_philo->philo_id % 2) == 0)
-	//		usleep(150);
+		writer(le_philo, THINK);
+		usleep(1000);
 		i++;
 	}
 
@@ -106,14 +101,16 @@ void	*monitor(void *sus)
 	//		break ;
 		if (le_philo->data->tm_die <= (get_time() - le_philo->last_meal))
 		{
-			writer(le_philo, "died");
+			writer(le_philo, DIE);
 			le_philo->data->dead_flag = 1;
 			break ;
 		}
+		if (le_philo->data->emergency_stop)
+			break;
 		//++i;
 		le_philo = le_philo->next;
 	}
-	return NULL;
+	return (NULL);
 }
 
 int main(int ac, char **av)
