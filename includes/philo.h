@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/04 17:04:52 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/04 22:31:39 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -21,15 +21,18 @@
 # include <sys/time.h>
 # include <string.h>
 
-# define IN_ERROR "You must enter the following arguments:\n\t\
-	number_of_philosophers time_to_die time_to_eat time_to_sleep\
-	[number_of_times_each_philosopher_must_eat]\n"
+# define IN_ERROR "\e[1;41mYou must enter the following arguments:\e[0m\n\
+\t\t\t\e[1;33m- number_of_philosophers\e[0m\n\
+\t\t\t\e[1;31m- time_to_die\e[0m\n\
+\t\t\t\e[1;35m- time_to_eat\e[0m\n\
+\t\t\t\e[1;36m- time_to_sleep\e[0m\n\
+\t\t\t\e[1;3m- [number_of_times_each_philosopher_must_eat]]\e[0m\n"
 
-# define DIE "die"
-# define FORK "has taken a fork"
-# define EAT "is eating"
-# define SLEEP "is sleeping"
-# define THINK "is thinking"
+# define FORK "\e[1;33mhas taken a fork\e[0m"
+# define EAT "\e[1;35mis eating\e[0m"
+# define SLEEP "\e[1;36mis sleeping\e[0m"
+# define THINK "\e[1;32mis thinking\e[0m"
+# define DIE "\e[1;31mdied\e[0m"
 
 typedef struct s_philo	t_philo;
 typedef struct s_data	t_data;
@@ -103,6 +106,7 @@ void		fork_lock(t_data *data, t_philo *philo);
 /* Tools	 functions */
 int			writer(t_philo *data, char *message);
 void		cleaner(t_data *data);
+void		mine_sleep(long tm_sleep, t_philo *le_philo);
 
 /* Related with LIBFT */
 int			ft_strlen(char *str);

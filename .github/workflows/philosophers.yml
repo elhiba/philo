@@ -11,10 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update & upgrade + Installing valgrind
+      - name: Update & Installing valgrind
         run: |
           sudo apt update 
-          sudo apt upgrade -y
           sudo apt install -y valgrind
 
       - name: Compile

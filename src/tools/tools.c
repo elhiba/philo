@@ -6,26 +6,26 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 03:24:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/04 17:03:38 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/04 22:46:32 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-void	mine_sleep(long tm_sleep)
+void	mine_sleep(long tm_sleep, t_philo *le_philo)
 {
 	long	start_time;
 
 	start_time = get_time();
-	while (tm_sleep <= (get_time() - start_time))
-		usleep(150);
+	while (tm_sleep >= (get_time() - start_time) && !le_philo->data->dead_flag && !le_philo->data->emergency_stop)
+		usleep(200);
 }
 
 int	writer(t_philo *data, char *message)
 {
 	pthread_mutex_lock(data->pen);
 	if (!data->data->dead_flag)
-		printf("%.6ld %i %s\n", get_time() - data->data->start_routine, data->philo_id, message);
+		printf("%.6ld %.3i %s\n", get_time() - data->data->start_routine, data->philo_id, message);
 	pthread_mutex_unlock(data->pen);
 	if (data->data->dead_flag)
 		return (1);

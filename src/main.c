@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/04 17:03:37 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/04 23:25:17 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*routini(void *tmp)
 	le_philo = (t_philo *)tmp;
 	if (le_philo->philo_id == le_philo->data->nm_philo) le_philo->data->start = true;
 	if ((le_philo->philo_id % 2) == 0)
-		usleep(150);
+		usleep(1000);
 	le_philo->last_meal = get_time();
 	while (!le_philo->data->dead_flag)
 	{
@@ -49,7 +49,7 @@ void	*routini(void *tmp)
 		le_philo->last_meal = get_time();
 
 		writer(le_philo, EAT);
-		usleep(le_philo->data->tm_eat * 1000l);
+		mine_sleep(le_philo->data->tm_eat, le_philo);
 
 		if (le_philo->philo_id == le_philo->data->nm_philo)
 		{
@@ -63,10 +63,10 @@ void	*routini(void *tmp)
 		}
 
 		writer(le_philo, SLEEP);
-		usleep(le_philo->data->tm_sleep * 1000l);
+		mine_sleep(le_philo->data->tm_sleep, le_philo);
 
 		writer(le_philo, THINK);
-		usleep(1000);
+		mine_sleep(2, le_philo);
 		i++;
 	}
 
@@ -94,11 +94,8 @@ void	*monitor(void *sus)
 	while (!le_philo->data->start)
 		usleep(10);
 
-	//i = 0;
 	while(1)
 	{
-	//	if (le_philo->data->tm_each_philo_meat == i)
-	//		break ;
 		if (le_philo->data->tm_die <= (get_time() - le_philo->last_meal))
 		{
 			writer(le_philo, DIE);
@@ -107,7 +104,6 @@ void	*monitor(void *sus)
 		}
 		if (le_philo->data->emergency_stop)
 			break;
-		//++i;
 		le_philo = le_philo->next;
 	}
 	return (NULL);
