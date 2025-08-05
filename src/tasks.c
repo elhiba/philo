@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 02:01:20 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/05 16:38:58 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/05 23:17:36 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ int	le_think(t_philo *le_philo)
 	if (!le_philo->data->dead_flag && !le_philo->data->emergency_stop)
 	{
 		writer(le_philo, THINK);
-		mine_sleep(2, le_philo);
+		if ((le_philo->data->nm_philo % 2) && le_philo->time_to_eat >= le_philo->time_to_sleep)
+			mine_sleep((le_philo->time_to_eat - le_philo->time_to_sleep) + 1, le_philo);
+
 		return (0);
 	}
 	return (1);

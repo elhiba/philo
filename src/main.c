@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/05 22:35:16 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/05 22:57:26 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,17 @@ void	*routini(void *tmp)
 
 	i = 0;
 	le_philo = (t_philo *)tmp;
-	if (le_philo->philo_id == le_philo->data->nm_philo) le_philo->data->start = true;
+	if (le_philo->philo_id == le_philo->data->nm_philo)
+		le_philo->data->start = true;
+
 	if ((le_philo->philo_id % 2) == 0)
 		usleep(1000);
+
 	le_philo->last_meal = get_time();
+
 	if (le_special_philo(le_philo))
 		return (NULL);
+	
 	while (!le_philo->data->dead_flag)
 	{
 		if (le_philo->many_eat == i)
