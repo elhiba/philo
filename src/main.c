@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/05 16:24:59 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/05 22:35:16 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ void	*routini(void *tmp)
 			break ;
 		}
 
-		if (le_fork(le_philo))
-			;
+		le_fork(le_philo);
 
 		le_philo->last_meal = get_time();
 
-		if (le_eat(le_philo))
-			;
+		le_eat(le_philo);
 
 		if (le_unfork(le_philo))
 			break ;
