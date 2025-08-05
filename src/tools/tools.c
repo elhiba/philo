@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 03:24:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/04 22:46:32 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/05 16:14:57 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	writer(t_philo *data, char *message)
 {
 	pthread_mutex_lock(data->pen);
 	if (!data->data->dead_flag)
-		printf("%.6ld %.3i %s\n", get_time() - data->data->start_routine, data->philo_id, message);
+		printf("%.6ld\t%.3i %s\n", get_time() - data->data->start_routine, data->philo_id, message);
 	pthread_mutex_unlock(data->pen);
 	if (data->data->dead_flag)
 		return (1);

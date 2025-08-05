@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/04 22:31:39 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/05 16:26:50 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -68,6 +68,8 @@ struct s_philo
 	pthread_mutex_t			*fork;
 	pthread_mutex_t			*fork_right;
 
+	_Atomic bool			is_fork;
+
 	_Atomic int				many_eat;
 	_Atomic long			time_to_eat;
 	_Atomic long			time_to_sleep;
@@ -98,6 +100,14 @@ struct s_data
 	t_philo					*philo;
 };
 
+/* le_task */
+int			le_special_philo(t_philo *le_philo);
+int			le_fork(t_philo *le_philo);
+int			le_unfork(t_philo *le_philo);
+int			le_eat(t_philo *le_philo);
+int			le_sleep(t_philo *le_philo);
+int			le_think(t_philo *le_philo);
+
 /* Philos functions */
 void		init_data(t_data *data, char **av);
 t_philo		*init_philo(t_data *data);
@@ -114,6 +124,6 @@ int			ft_atoi(char *num);
 void		*ft_calloc(size_t nmemb, size_t size);
 
 /* Function of time */
-long	get_time(void);
+long		get_time(void);
 //void	mine_sleep(long tm_sleep);
 #endif
