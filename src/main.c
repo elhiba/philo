@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/05 23:23:32 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/06 11:09:09 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,12 @@ int main(int ac, char **av)
 	init_data(&data, ++av);
 	data.philo = init_philo(&data);
 	fork_lock(&data, (&data)->philo);
+
+	if (data.failure)
+	{
+		printf("Malloc");
+		return (2);
+	}
 
 	pthread_create(&t1, NULL, monitor, (void *)&data);
 	pthread_join(t1, NULL);

@@ -3,7 +3,7 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
 
-SRC = $(wildcard src/*.c src/tools/*.c)
+SRC = $(wildcard malloc.c src/*.c src/tools/*.c)
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c
@@ -13,9 +13,6 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 	@echo "\e[1;31mbefore You push fix the wildcard!\e[0m"
 	@echo "\e[1;31mHandel the cases 0 philo\e[0m"
-	@echo "\e[1;31mHandel the cases 1 philo\e[0m"
-
-#@echo "\e[1;31mNO_FLAGS!\e[0m"
 
 all: $(NAME)
 

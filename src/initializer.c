@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:31:32 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/04 17:03:40 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/06 11:13:04 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,14 @@ t_philo	*init_philo(t_data *data)
 
 	i = 1;
 	ptr = ft_calloc(1, sizeof(t_philo));
+	if (!ptr)
+		errors(data, "malloc");
 	philo = ptr;
 	while (i < data->nm_philo)
 	{
 		tmp = ft_calloc(1, sizeof(t_philo));
+		if(!tmp)
+			errors(data, "malloc");
 		ptr->next = tmp;
 		ptr = tmp;
 		i++;
@@ -52,6 +56,8 @@ void	philo_linker(t_philo *philo)
 	int		i;
 
 	i = 0;
+	if (!philo)
+		return ;
 	ptr = philo;
 	while (i < ptr->data->nm_philo)
 	{
@@ -75,6 +81,8 @@ void	fork_lock(t_data *data, t_philo *philo)
 	i = 0;
 	ptr = philo;
 	pen = ft_calloc(1, sizeof(pthread_mutex_t));
+	if (!pen)
+		errors(data, "malloc");
 	pthread_mutex_init(pen, NULL);
 	data->start = false;
 	while (i < data->nm_philo)
@@ -86,6 +94,8 @@ void	fork_lock(t_data *data, t_philo *philo)
 		ptr->pen = pen;
 		ptr->data = data;
 		ptr->fork = ft_calloc(1, sizeof(pthread_mutex_t));
+		if (!ptr->fork)
+			errors(data, "malloc");
 		pthread_mutex_init(ptr->fork, NULL);
 		ptr = ptr->next;
 		i++;

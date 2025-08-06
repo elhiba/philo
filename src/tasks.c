@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 02:01:20 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/05 23:17:36 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/06 10:16:53 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int	le_fork(t_philo *le_philo)
 	}
 	le_philo->is_fork = 1;
 	if (!le_philo->data->dead_flag && !le_philo->data->emergency_stop)
-	{
 		return (0);
-	}
 	return (1);
 }
 
@@ -62,9 +60,7 @@ int	le_unfork(t_philo *le_philo)
 		pthread_mutex_unlock(le_philo->fork);
 	}
 	if (!le_philo->data->dead_flag && !le_philo->data->emergency_stop)
-	{
 		return (0);
-	}
 	return (1);
 }
 

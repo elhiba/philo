@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/05 16:26:50 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/06 11:47:52 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -88,14 +88,16 @@ struct s_data
 	long					tm_die;
 	long					tm_eat;
 	long					tm_sleep;
-	_Atomic long				tm_each_philo_meat;
+	_Atomic long			tm_each_philo_meat;
 
-	long				start_routine;
+	long					start_routine;
 
 	_Atomic bool			start;
 
 	_Atomic bool			dead_flag;
 	_Atomic bool			emergency_stop;
+
+	bool					failure;
 
 	t_philo					*philo;
 };
@@ -125,5 +127,5 @@ void		*ft_calloc(size_t nmemb, size_t size);
 
 /* Function of time */
 long		get_time(void);
-//void	mine_sleep(long tm_sleep);
+void		errors(t_data *data, char *message);
 #endif
