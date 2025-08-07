@@ -6,11 +6,11 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:31:32 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/06 14:44:54 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/07 01:46:17 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../../includes/philo.h"
 
 void	init_data(t_data *data, char **av)
 {
@@ -35,19 +35,13 @@ t_philo	*init_philo(t_data *data)
 	i = 1;
 	ptr = ft_calloc(1, sizeof(t_philo));
 	if (!ptr)
-	{
-		errors(data, "malloc");
-		return NULL;
-	}
+		return (NULL);
 	philo = ptr;
 	while (i < data->nm_philo)
 	{
 		tmp = ft_calloc(1, sizeof(t_philo));
-		if(!tmp)
-		{
-			errors(data, "malloc");
-			return NULL;
-		}
+		if (!tmp)
+			return (NULL);
 		ptr->next = tmp;
 		ptr = tmp;
 		i++;
@@ -56,14 +50,14 @@ t_philo	*init_philo(t_data *data)
 	return (philo);
 }
 
-void	philo_linker(t_philo *philo)
+int	philo_linker(t_philo *philo)
 {
 	t_philo	*ptr;
 	int		i;
 
 	i = 0;
 	if (!philo)
-		return ;
+		return (2);
 	ptr = philo;
 	while (i < ptr->data->nm_philo)
 	{
@@ -76,22 +70,19 @@ void	philo_linker(t_philo *philo)
 			ptr->fork_right = philo->fork;
 		i++;
 	}
+	return (0);
 }
 
-void	fork_lock(t_data *data, t_philo *philo)
+int	fork_lock(t_data *data, t_philo *philo)
 {
 	int				i;
 	t_philo			*ptr;
 	pthread_mutex_t	*pen;
 
-	i = 0;
-	ptr = philo;
+	(1) && (i = 0, ptr = philo);
 	pen = ft_calloc(1, sizeof(pthread_mutex_t));
 	if (!philo || !pen)
-	{
-		errors(data, "malloc");
-		return;
-	}
+		return (errors(data, MALLOC_ERR));
 	pthread_mutex_init(pen, NULL);
 	data->start = false;
 	while (i < data->nm_philo)
@@ -104,13 +95,9 @@ void	fork_lock(t_data *data, t_philo *philo)
 		ptr->data = data;
 		ptr->fork = ft_calloc(1, sizeof(pthread_mutex_t));
 		if (!ptr->fork)
-		{
-			errors(data, "malloc");
-			return;
-		}
+			return (errors(data, MALLOC_ERR));
 		pthread_mutex_init(ptr->fork, NULL);
-		ptr = ptr->next;
-		i++;
+		(1) && (ptr = ptr->next, i++);
 	}
-	philo_linker(philo);
+	return (philo_linker(philo));
 }

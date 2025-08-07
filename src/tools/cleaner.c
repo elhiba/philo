@@ -6,14 +6,17 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:03:36 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/07/28 06:29:45 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/07 01:53:04 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-void	philo_job(int i, t_philo *ptr)
+void	philo_job(t_philo *ptr)
 {
+	int	i;
+
+	i = 0;
 	ptr = ptr->data->philo;
 	while (i < ptr->data->nm_philo)
 	{
@@ -23,8 +26,11 @@ void	philo_job(int i, t_philo *ptr)
 	}
 }
 
-void	philo_destroy(int i, t_philo *ptr)
+void	philo_destroy(t_philo *ptr)
 {
+	int	i;
+
+	i = 0;
 	ptr = ptr->data->philo;
 	pthread_mutex_destroy(ptr->pen);
 	while (i < ptr->data->nm_philo)
@@ -33,24 +39,14 @@ void	philo_destroy(int i, t_philo *ptr)
 		i++;
 		ptr = ptr->next;
 	}
-
 }
 
-void	philo_is_free()
-{
-
-}
-
-void	cleaner(t_data *data)
+void	philo_is_free(t_data *data)
 {
 	t_philo	*ptr;
 	int		i;
 
 	i = 0;
-	philo_job(i, data->philo);
-
-	philo_destroy(i, data->philo);
-
 	ptr = data->philo->next;
 	free(data->philo->pen);
 	while (i < data->nm_philo)
@@ -63,4 +59,11 @@ void	cleaner(t_data *data)
 			ptr = ptr->next;
 		i++;
 	}
+}
+
+void	cleaner(t_data *data)
+{
+	philo_job(data->philo);
+	philo_destroy(data->philo);
+	philo_is_free(data);
 }
