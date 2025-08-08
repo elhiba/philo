@@ -14,18 +14,16 @@ OBJ = $(SRC:.c=.o)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $^ -o $@
-	@echo "\e[1;31mHandel the cases 0 philo\e[0m"
-	@echo "\e[1;31mwrite func for DIE\e[0m"
 
 all: $(NAME)
 
 clean:
 	@rm -f $(OBJ)
-	@echo "All those \`$(foreach i, $(OBJ),\e[1;31m$i\e[0m)\` has been cleaned!"
+	@echo "All those object files:\n\`$(foreach i, $(OBJ),\e[1;31m$i\e[0m\n)\` has been cleaned!"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\e[1;31mle_$(NAME)\e[0m has been \e[1;41mdeleted\e[0m"
+	@echo "\e[1;31mle_$(NAME)\e[0m has been \e[1;41mdeleted\e[0m!"
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/06 23:32:58 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/08 23:17:18 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -27,6 +27,14 @@
 \t\t\t\e[1;35m- time_to_eat\e[0m\n\
 \t\t\t\e[1;36m- time_to_sleep\e[0m\n\
 \t\t\t\e[1;3m- [number_of_times_each_philosopher_must_eat]]\e[0m\n"
+
+# define IN_NOT_VAL "Here an example how to run \e[0;35mle_philo\e[0m:\n\
+\t\e[0;35m./philo\e[0m \e[1;32m4\e[0m \e[1;32m210\e[0m \e[1;32m100\e[0m \
+\e[1;32m100\e[0m ↩ Should works fine!\n\
+\t\e[0;35m./philo\e[0m \e[1;32m5\e[0m \e[1;32m310\e[0m \e[1;32m100\e[0m \
+\e[1;32m100\e[0m ↩ Should work OFC!\n\
+\t\e[0;35m./philo\e[0m \e[1;31m0\e[0m \e[1;32m200\e[0m \e[1;32m9\e[0m \
+\e[1;31m-1\e[0m ↩ Ofc this is a \e[1;41mbad practice\e[0m!\n"
 
 # define FORK "\e[1;33mhas taken a fork\e[0m"
 # define EAT "\e[1;35mis eating\e[0m"
@@ -89,9 +97,10 @@ int						le_unfork(t_philo *le_philo);
 int						le_eat(t_philo *le_philo);
 int						le_sleep(t_philo *le_philo);
 int						le_think(t_philo *le_philo);
+void					la_mort(t_philo *le_philo);
 
 /* Philos functions */
-void					init_data(t_data *data, char **av);
+int						init_data(t_data *data, char **av);
 t_philo					*init_philo(t_data *data);
 int						fork_lock(t_data *data, t_philo *philo);
 
@@ -102,7 +111,7 @@ void					mine_sleep(long tm_sleep, t_philo *le_philo);
 
 /* Related with LIBFT */
 int						ft_strlen(char *str);
-int						ft_atoi(char *num);
+long					ft_atoi(char *num);
 void					*ft_calloc(size_t nmemb, size_t size);
 
 /* Function of time */

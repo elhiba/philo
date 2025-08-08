@@ -6,13 +6,13 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:31:32 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/07 01:46:17 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/08 22:47:21 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 
-void	init_data(t_data *data, char **av)
+int	init_data(t_data *data, char **av)
 {
 	memset(data, 0, sizeof(t_data));
 	data->nm_philo = ft_atoi(av[0]);
@@ -23,6 +23,11 @@ void	init_data(t_data *data, char **av)
 		data->tm_each_philo_meat = ft_atoi(av[4]);
 	else
 		data->tm_each_philo_meat = -1;
+	if (data->nm_philo == -2 || data->tm_die == -2
+		|| data->tm_eat == -2 || data->tm_sleep == -2
+		|| data->tm_each_philo_meat == -2)
+		return (1);
+	return (0);
 }
 
 t_philo	*init_philo(t_data *data)
