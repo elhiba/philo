@@ -10,7 +10,7 @@ OBJ = $(SRC:.c=.o)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "\e[1;32mCompiling from $< to ↴\v$@\e[0m"
+	@echo "\e[1;32mCompiling from $< to $@\e[0m"
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $^ -o $@
