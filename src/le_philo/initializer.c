@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:31:32 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/08 22:47:21 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/10 20:16:25 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,25 @@ int	philo_linker(t_philo *philo)
 	return (0);
 }
 
+int	small_init(t_data *data, t_philo *philo, pthread_mutex_t **pen)
+{
+	*pen = ft_calloc(1, sizeof(pthread_mutex_t));
+	if (!philo || !*pen)
+		return (errors(data, MALLOC_ERR));
+	pthread_mutex_init(*pen, NULL);
+	data->start = false;
+	return (0);
+}
+
 int	fork_lock(t_data *data, t_philo *philo)
 {
 	int				i;
 	t_philo			*ptr;
 	pthread_mutex_t	*pen;
 
-	(1) && (i = 0, ptr = philo);
-	pen = ft_calloc(1, sizeof(pthread_mutex_t));
-	if (!philo || !pen)
-		return (errors(data, MALLOC_ERR));
-	pthread_mutex_init(pen, NULL);
-	data->start = false;
+	i = 0;
+	ptr = philo;
+	small_init(data, philo, &pen);
 	while (i < data->nm_philo)
 	{
 		ptr->philo_id = i + 1;
@@ -102,7 +109,8 @@ int	fork_lock(t_data *data, t_philo *philo)
 		if (!ptr->fork)
 			return (errors(data, MALLOC_ERR));
 		pthread_mutex_init(ptr->fork, NULL);
-		(1) && (ptr = ptr->next, i++);
+		ptr = ptr->next;
+		i++;
 	}
 	return (philo_linker(philo));
 }

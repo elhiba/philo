@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:03:36 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/07 01:53:04 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/10 20:13:45 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ void	philo_job(t_philo *ptr)
 	int	i;
 
 	i = 0;
-	ptr = ptr->data->philo;
-	while (i < ptr->data->nm_philo)
+	if (ptr)
 	{
-		pthread_join(ptr->philo, NULL);
-		ptr = ptr->next;
-		i++;
+		ptr = ptr->data->philo;
+		while (i < ptr->data->nm_philo)
+		{
+			if (pthread_join(ptr->philo, NULL))
+				printf("Can't join with errno: %i\n", errno);
+			ptr = ptr->next;
+			i++;
+		}
 	}
 }
 
@@ -32,10 +36,12 @@ void	philo_destroy(t_philo *ptr)
 
 	i = 0;
 	ptr = ptr->data->philo;
-	pthread_mutex_destroy(ptr->pen);
+	if (pthread_mutex_destroy(ptr->pen))
+		printf("Can't destroy with errno: %i\n", errno);
 	while (i < ptr->data->nm_philo)
 	{
-		pthread_mutex_destroy(ptr->fork);
+		if (pthread_mutex_destroy(ptr->fork))
+			printf("Can't destroy with errno: %i\n", errno);
 		i++;
 		ptr = ptr->next;
 	}
