@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/08 22:51:43 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:48:01 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,13 @@ void	le_bigbang(t_philo *le_philo)
 	i = 0;
 	while (le_philo->data && i < le_philo->data->nm_philo)
 	{
-		pthread_create(&le_philo->philo, NULL, routini, (void *)le_philo);
+		if (pthread_create(&le_philo->philo, NULL, routini, (void *)le_philo))
+		{
+			printf("Cannot create le philo number: %ld \
+with the errno: %i\n", i, errno);
+			le_philo->data->emergency_stop = 1;
+			return ;
+		}
 		le_philo->last_meal = get_time();
 		le_philo = le_philo->next;
 		i++;
@@ -109,8 +115,10 @@ int	main(int ac, char **av)
 	fork_lock(&data, (&data)->philo);
 	if (data.failure)
 		return (2);
-	pthread_create(&t1, NULL, monitor, (void *)&data);
-	pthread_join(t1, NULL);
+	if (pthread_create(&t1, NULL, monitor, (void *)&data))
+		return (errno);
+	if (pthread_join(t1, NULL))
+		return (errno);
 	cleaner(&data);
 	if (data.dead_flag)
 		return (1);

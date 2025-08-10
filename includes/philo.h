@@ -6,20 +6,21 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/08 23:17:18 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:18:14 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
 # define PHILO_H
 
 # include <stdio.h>
+# include <errno.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdbool.h>
-# include <pthread.h>
-# include <stdatomic.h>
-# include <sys/time.h>
 # include <string.h>
+# include <pthread.h>
+# include <stdbool.h>
+# include <sys/time.h>
+# include <stdatomic.h>
 
 # define IN_ERROR "\e[1;41mYou must enter the following arguments:\e[0m\n\
 \t\t\t\e[1;33m- number_of_philosophers\e[0m\n\
