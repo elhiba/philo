@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 02:01:20 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/08 22:24:40 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:26:29 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,8 @@ int	le_fork(t_philo *le_philo)
 
 int	le_unfork(t_philo *le_philo)
 {
-	if (le_philo->philo_id == le_philo->data->nm_philo)
-	{
-		pthread_mutex_unlock(le_philo->fork);
-		pthread_mutex_unlock(le_philo->fork_right);
-	}
-	else
-	{
-		pthread_mutex_unlock(le_philo->fork_right);
-		pthread_mutex_unlock(le_philo->fork);
-	}
+	pthread_mutex_unlock(le_philo->fork);
+	pthread_mutex_unlock(le_philo->fork_right);
 	if (!le_philo->data->dead_flag && !le_philo->data->emergency_stop)
 		return (0);
 	return (1);

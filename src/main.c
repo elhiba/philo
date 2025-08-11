@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:01 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/10 19:04:38 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:55:11 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	le_bigbang(t_philo *le_philo)
 	{
 		if (pthread_create(&le_philo->philo, NULL, routini, (void *)le_philo))
 		{
+			le_philo->philo = (pthread_t)(-1);
 			printf("Cannot create le philo number: %ld \
 with the errno: %i\n", i, errno);
 			le_philo->data->emergency_stop = 1;

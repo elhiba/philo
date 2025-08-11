@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:03:36 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/10 20:13:45 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:58:17 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	philo_job(t_philo *ptr)
 		ptr = ptr->data->philo;
 		while (i < ptr->data->nm_philo)
 		{
+			if (ptr->philo == (pthread_t)(-1))
+				break ;
 			if (pthread_join(ptr->philo, NULL))
 				printf("Can't join with errno: %i\n", errno);
 			ptr = ptr->next;
