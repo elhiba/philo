@@ -6,7 +6,7 @@
 /*   By: moel-hib <moel-hib@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 08:55:25 by moel-hib          #+#    #+#             */
-/*   Updated: 2025/08/10 15:18:14 by moel-hib         ###   ########.fr       */
+/*   Updated: 2025/08/11 22:18:08 by moel-hib         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PHILO_H
@@ -43,7 +43,7 @@
 # define THINK "\e[1;32mis thinking\e[0m"
 # define DIE "\e[1;31mdied\e[0m"
 
-# define MALLOC_ERR "malloc: im dead\n"
+# define MALLOC_ERR "malloc: Dead inside!\n"
 
 typedef struct s_philo	t_philo;
 typedef struct s_data	t_data;
