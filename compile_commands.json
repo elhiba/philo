@@ -11,9 +11,9 @@
       "src/main.o",
       "src/main.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/main.c",
-    "output": "/home/elhiba/Documents/code/philo/src/main.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/main.c",
+    "output": "/home/moel-hib/Documents/philo/src/main.o"
   },
   {
     "arguments": [
@@ -27,9 +27,9 @@
       "src/le_philo/initializer.o",
       "src/le_philo/initializer.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/le_philo/initializer.c",
-    "output": "/home/elhiba/Documents/code/philo/src/le_philo/initializer.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/le_philo/initializer.c",
+    "output": "/home/moel-hib/Documents/philo/src/le_philo/initializer.o"
   },
   {
     "arguments": [
@@ -43,9 +43,9 @@
       "src/le_philo/le_philo.o",
       "src/le_philo/le_philo.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/le_philo/le_philo.c",
-    "output": "/home/elhiba/Documents/code/philo/src/le_philo/le_philo.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/le_philo/le_philo.c",
+    "output": "/home/moel-hib/Documents/philo/src/le_philo/le_philo.o"
   },
   {
     "arguments": [
@@ -59,9 +59,9 @@
       "src/le_philo/tasks.o",
       "src/le_philo/tasks.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/le_philo/tasks.c",
-    "output": "/home/elhiba/Documents/code/philo/src/le_philo/tasks.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/le_philo/tasks.c",
+    "output": "/home/moel-hib/Documents/philo/src/le_philo/tasks.o"
   },
   {
     "arguments": [
@@ -75,9 +75,9 @@
       "src/tools/cleaner.o",
       "src/tools/cleaner.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/tools/cleaner.c",
-    "output": "/home/elhiba/Documents/code/philo/src/tools/cleaner.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/tools/cleaner.c",
+    "output": "/home/moel-hib/Documents/philo/src/tools/cleaner.o"
   },
   {
     "arguments": [
@@ -91,9 +91,9 @@
       "src/tools/error.o",
       "src/tools/error.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/tools/error.c",
-    "output": "/home/elhiba/Documents/code/philo/src/tools/error.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/tools/error.c",
+    "output": "/home/moel-hib/Documents/philo/src/tools/error.o"
   },
   {
     "arguments": [
@@ -107,9 +107,9 @@
       "src/tools/ft_atoi.o",
       "src/tools/ft_atoi.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/tools/ft_atoi.c",
-    "output": "/home/elhiba/Documents/code/philo/src/tools/ft_atoi.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/tools/ft_atoi.c",
+    "output": "/home/moel-hib/Documents/philo/src/tools/ft_atoi.o"
   },
   {
     "arguments": [
@@ -123,9 +123,9 @@
       "src/tools/ft_calloc.o",
       "src/tools/ft_calloc.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/tools/ft_calloc.c",
-    "output": "/home/elhiba/Documents/code/philo/src/tools/ft_calloc.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/tools/ft_calloc.c",
+    "output": "/home/moel-hib/Documents/philo/src/tools/ft_calloc.o"
   },
   {
     "arguments": [
@@ -139,9 +139,9 @@
       "src/tools/ft_strlen.o",
       "src/tools/ft_strlen.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/tools/ft_strlen.c",
-    "output": "/home/elhiba/Documents/code/philo/src/tools/ft_strlen.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/tools/ft_strlen.c",
+    "output": "/home/moel-hib/Documents/philo/src/tools/ft_strlen.o"
   },
   {
     "arguments": [
@@ -155,8 +155,8 @@
       "src/tools/tools.o",
       "src/tools/tools.c"
     ],
-    "directory": "/home/elhiba/Documents/code/philo",
-    "file": "/home/elhiba/Documents/code/philo/src/tools/tools.c",
-    "output": "/home/elhiba/Documents/code/philo/src/tools/tools.o"
+    "directory": "/home/moel-hib/Documents/philo",
+    "file": "/home/moel-hib/Documents/philo/src/tools/tools.c",
+    "output": "/home/moel-hib/Documents/philo/src/tools/tools.o"
   }
 ]
