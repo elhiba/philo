@@ -10,7 +10,7 @@ OBJ = $(SRC:.c=.o)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "\e[1;32mCompiling from $< to $@\e[0m"
+	@echo -e "\e[1;32mCompiling from $< to $@\e[0m"
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $^ -o $@
@@ -19,11 +19,11 @@ all: $(NAME)
 
 clean:
 	@rm -f $(OBJ)
-	@echo "All those object files:\n\`$(foreach i, $(OBJ),\e[1;31m$i\e[0m\n)\` has been cleaned!"
+	@echo -e "All those object files:\n\`$(foreach i, $(OBJ),\e[1;31m$i\e[0m\n)\` has been cleaned!"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\e[1;31mle_$(NAME)\e[0m has been \e[1;41mdeleted\e[0m!"
+	@echo -e "\e[1;31mle_$(NAME)\e[0m has been \e[1;41mdeleted\e[0m!"
 
 re: fclean all
 
