@@ -61,6 +61,9 @@ jobs:
       steps:
         - name: Github Checkout
           uses: actions/checkout@v4
+
+        - name: Build the project
+          run: make
           
         - name: Create github release
           id: create-release
