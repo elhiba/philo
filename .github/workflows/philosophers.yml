@@ -66,13 +66,12 @@ jobs:
         continue-on-error: true
         run: ./philo 200 410 200 200 4
 
-
-
       - name: Valgrind (ON LINUX ONLY)
         continue-on-error: true
         if: runner.os == 'Linux'
-        run: valgrind --tool=helgrind ./philo 2 410 200 200 4
-        run: valgrind --tool=helgrind ./philo 200 410 200 200 4
+        run: |
+          valgrind --tool=helgrind ./philo 2 410 200 200 4
+          valgrind --tool=helgrind ./philo 200 410 200 200 4
 
       - name: Upload Artificial
         uses: actions/upload-artifact@v4
