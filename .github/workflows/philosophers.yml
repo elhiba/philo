@@ -60,6 +60,9 @@ jobs:
       runs-on: ubuntu-latest
       needs: build-project
       steps:
+        - name: Github Checkout
+          uses: actions/checkout@v4
+          
         - name: Create github release
           id: create-release
           uses: actions/create-release@v1
