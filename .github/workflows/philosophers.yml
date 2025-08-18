@@ -134,5 +134,5 @@ jobs:
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
           asset_path: artifacts/philo-windows-latest/philo.exe
-          asset_name: philo-windows_v${{ github.run_number }}
+          asset_name: philo-windows_v${{ github.run_number }}.exe
           asset_content_type: application/octet-stream
