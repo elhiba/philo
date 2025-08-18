@@ -3,9 +3,6 @@ name: philos
 on:
   push:
 
-permissions:
-  contents: write
-
 jobs:
   build-project:
 
@@ -73,61 +70,69 @@ jobs:
           valgrind --tool=helgrind ./philo 2 410 200 200 4
           valgrind --tool=helgrind ./philo 200 410 200 200 4
 
-      - name: Upload Artificial
+      - name: Figure out binary path
+        shell: bash
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            echo "BIN=philo.exe" >> $GITHUB_ENV
+          else
+            echo "BIN=philo" >> $GITHUB_ENV
+          fi
+
+      - name: Upload artifact (OS-scoped name)
         uses: actions/upload-artifact@v4
         with:
-          name: philo-${{ runner.os }}
-          path: ./philo
+          name: philo-${{ matrix.os }}          # => philo-ubuntu-latest, philo-macos-latest, philo-windows-latest
+          path: ${{ env.BIN }}                  # philo on *nix, philo.exe on Windows
 
   release-project:
-      name: Release project
-      
-      runs-on: ubuntu-latest 
-      
-      needs: build-project
-      
-      steps:
+    needs: build-project
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
 
-        - name: Download all artifacts
-          uses: actions/download-artifact@v4
-          with:
-            path: ./artifacts
-          
-        - name: Create github release
-          id: create-release
-          uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: ${{ github.run_number }}
-            release_name: Release ${{ github.run_number }}
-            
-        - name: Upload Linux binary
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create-release.outputs.upload_url }}
-            asset_path: ./artifacts/philo-ubuntu-latest/philo
-            asset_name: philo-linux_v${{ github.run_number }}
-            asset_content_type: application/octet-stream
-  
-        - name: Upload macOS binary
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create-release.outputs.upload_url }}
-            asset_path: ./artifacts/philo-macos-latest/philo
-            asset_name: philo-macos_v${{ github.run_number }}
-            asset_content_type: application/octet-stream
-  
-        - name: Upload Windows binary
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create-release.outputs.upload_url }}
-            asset_path: ./artifacts/philo-windows-latest/philo.exe
-            asset_name: philo-windows_v${{ github.run_number }}
-            asset_content_type: application/octet-stream
+      - name: Debug listing
+        run: ls -R artifacts
+
+      - name: Create GitHub release
+        id: create-release
+        uses: actions/create-release@v1
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+
+      - name: Upload Linux binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: artifacts/philo-ubuntu-latest/philo
+          asset_name: philo-linux_v${{ github.run_number }}
+          asset_content_type: application/octet-stream
+
+      - name: Upload macOS binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: artifacts/philo-macos-latest/philo
+          asset_name: philo-macos_v${{ github.run_number }}
+          asset_content_type: application/octet-stream
+
+      - name: Upload Windows binary
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: artifacts/philo-windows-latest/philo.exe
+          asset_name: philo-windows_v${{ github.run_number }}
+          asset_content_type: application/octet-stream
